@@ -11,6 +11,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import "./moves/moves";
+import "./reset/reset";
+import "./score/score";
+import "./timer/timer";
 /**
  * An example element.
  *
@@ -18,55 +22,36 @@ import { customElement, property } from 'lit/decorators.js';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-let MyElement = class MyElement extends LitElement {
+let Header = class Header extends LitElement {
     constructor() {
         super(...arguments);
         /**
          * The name to say "Hello" to.
          */
         this.name = 'World';
-        /**
-         * The number of times the button has been clicked.
-         */
-        this.count = 0;
     }
     render() {
-        return html `
-      <h1>${this.sayHello(this.name)}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Counter: ${this.count}
-      </button>
-      <slot></slot>
-    `;
+        return html `<header>
+                      <h1 class="heading-one">Matching Game</h1>
+                  </header>
+              
+                  <section class="score-panel">
+                      <memory-score></memory-score>
+                      <memory-moves></memory-moves>
+                      <memory-timer></memory-timer>
+                      <memory-reset></memory-reset>
+                  </section>`;
     }
-    _onClick() {
-        this.count++;
-        this.dispatchEvent(new CustomEvent('count-changed'));
-    }
-    /**
-     * Formats a greeting
-     * @param name The name to say "Hello" to
-     */
-    sayHello(name) {
-        return `Hello, ${name}`;
+    createRenderRoot() {
+        return this;
     }
 };
-MyElement.styles = css `
-    :host {
-      display: block;
-      border: solid 1px gray;
-      padding: 16px;
-      max-width: 800px;
-    }
-  `;
+Header.styles = css ``;
 __decorate([
     property()
-], MyElement.prototype, "name", void 0);
-__decorate([
-    property({ type: Number })
-], MyElement.prototype, "count", void 0);
-MyElement = __decorate([
-    customElement('my-element')
-], MyElement);
-export { MyElement };
-//# sourceMappingURL=my-element.js.map
+], Header.prototype, "name", void 0);
+Header = __decorate([
+    customElement('memory-header')
+], Header);
+export { Header };
+//# sourceMappingURL=header.js.map

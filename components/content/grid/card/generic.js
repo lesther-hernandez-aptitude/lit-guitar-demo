@@ -69,4 +69,4 @@ MyElement = __decorate([
     customElement('my-element')
 ], MyElement);
 export { MyElement };
-//# sourceMappingURL=my-element.js.map
+//# sourceMappingURL=generic.js.map

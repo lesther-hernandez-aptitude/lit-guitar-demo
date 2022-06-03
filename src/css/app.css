@@ -1,0 +1,269 @@
+*, *::before, *::after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #fff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
+h1, .score-panel memory-score {
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    max-width: 660px;
+    margin: 0 auto;
+    height: 100%;
+    /*border: 1px solid red;*/
+}
+
+/* **************************** */
+/*          DECK of CARDS       */
+/* **************************** */
+
+.deck {
+	display: flex; /*centers the deck on the screen*/
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%;
+    height: calc(95vh - 68px);
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+  .card {
+	display: flex; /*centers the symbol on each card*/
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 calc((100% / 4) - 20px);
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+  .card.unmatched {
+    background: #2e3d49;
+    color: #2e3d49;
+    /*color: gold;*/  /*to see the symbols when testing*/
+    font-size: calc(3vw + 3vh);
+    border: 1px solid #000;
+}
+
+ .card.selected {
+    font-size: calc(3vw + 3vh);
+    background: #02b3e4;
+    color: #333;
+    border: 1px solid #fff;
+    text-shadow: 1px 1px 2px #fff, -1px -1px 2px #fff;
+}
+
+.card.match {
+    font-size: calc(3vw + 3vh);
+    cursor: default;
+    background: #02ccba;
+    color: #fff;
+    border: 1px solid #000;
+    text-shadow: 5px 5px 15px #000;
+}
+
+/* **************************** */
+/*          SCORE PANEL         */
+/* **************************** */
+
+.fa-star {
+    color: #f7d205;
+    font-size: calc(2vw + 2vh);
+    letter-spacing: 4px;
+    /*border: 1px solid blue;*/
+}
+
+.fa-repeat {
+    font-size: calc(2vw + 2vh);
+    color: #000;
+    /*border: 1px solid blue;*/
+}
+
+/* counters of moves and seconds*/
+memory-score .timer, memory-score .moves {
+    font-size: calc(1.5vw + 1.5vh);
+    color: #1e9395;
+    font-family: monospace, monospace;
+}
+
+.score-panel {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    margin: 1vh 0;
+    width: 100%;
+    /*border: 1px solid red;*/ 
+    /* flex: 1 1 auto; */
+}
+
+memory-score, memory-moves, memory-timer, memory-reset{
+    flex: 1 1 auto; 
+}
+
+ .box {
+    flex: 1 1 auto;
+    /*border: 1px solid #ccc;*/
+    }
+
+.score-panel memory-score .stars li {
+    list-style: none;
+    display: inline-block;
+    /*border: 1px solid green;*/
+}
+
+
+.score-panel .restart, .container .hidden-repeat {
+    cursor: pointer;
+    transition: transform 0.4s;
+    }
+
+.score-panel memory-reset .restart {
+    cursor: pointer;
+    transition: transform 0.4s;
+}
+
+.score-panel memory-reset .restart:hover {
+    transform: rotate(40deg);
+}
+
+.container .hidden-repeat:hover {
+    transform: rotate(40deg);
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.displayNone {
+    display: none;
+}
+/* **************************** */
+/*            MODAL             */
+/* **************************** */
+
+.modal {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.modal-section {
+    position: relative;
+    top: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-section .modal {
+    position: absolute;
+    display: none;
+    z-index: 10;
+    height: 100%; /* 'top, right' at '.modal-close' would not work without it */
+    height: 50vh;
+    max-width: calc(90% - (100% - 660px));
+    box-sizing: border-box;
+    text-align: center;
+    padding: 1rem 3rem;
+    border-radius: 10px;
+    background-color: #eee;
+    border: 2px solid #333;
+    color: #333;
+}
+
+.modal-items {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 100%;
+}
+
+.fa-times-circle-o {
+    color: #333;
+}
+.fa-play-circle {
+    color: #1e9395;
+    cursor: pointer;
+    font-size: calc(2vw + 2vh);
+}
+
+.modal-close {
+    position: absolute;
+    right: 19px;
+    top: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-shadow: 1px 1px 6px gray;
+}
+
+.modal-close:hover {
+    text-shadow: 1px 1px 6px #eee;
+    color: #222;
+}
+
+/* the restart icon in the middle of the deck when the player refuses to carry on */
+.hidden-repeat {
+    display: none;
+    position: absolute;
+    left: calc(50% - (5em/2));
+    bottom: 55%;
+}
+
+.hidden-repeat .fa-repeat {
+    font-size: 5em;
+    z-index: 8;
+    color: #333;
+}
+
+/* ******************************** */
+/*            MEDIA QUERIES         */
+/* ******************************** */
+
+@media screen and (max-width: 450px) {
+    .container {
+        height: 100vh;
+    }
+
+    .deck {
+        height: 93vh;
+        padding: 1%;
+    }
+
+    .deck memory-card .card {
+        margin: 2%;
+    }
+
+    .heading-one {
+        display: none;
+    }
+
+    memory-score .moves,memory-score .timer {
+        font-size: calc(2vw + 2vh);
+    }
+}

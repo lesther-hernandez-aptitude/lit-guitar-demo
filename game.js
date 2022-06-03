@@ -11,6 +11,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import "./components/header/header";
+import "./components/content/grid/grid";
 /**
  * An example element.
  *
@@ -18,7 +20,7 @@ import { customElement, property } from 'lit/decorators.js';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-let MyElement = class MyElement extends LitElement {
+let Game = class Game extends LitElement {
     constructor() {
         super(...arguments);
         /**
@@ -31,17 +33,12 @@ let MyElement = class MyElement extends LitElement {
         this.count = 0;
     }
     render() {
-        return html `
-      <h1>${this.sayHello(this.name)}!</h1>
-      <button @click=${this._onClick} part="button">
-        Click Counter: ${this.count}
-      </button>
-      <slot></slot>
-    `;
-    }
-    _onClick() {
-        this.count++;
-        this.dispatchEvent(new CustomEvent('count-changed'));
+        return html `<div class="container">
+                  <memory-header></memory-header>
+                  <memory-grid>
+                  </memory-grid>
+                  
+                </div>`;
     }
     /**
      * Formats a greeting
@@ -50,8 +47,11 @@ let MyElement = class MyElement extends LitElement {
     sayHello(name) {
         return `Hello, ${name}`;
     }
+    createRenderRoot() {
+        return this;
+    }
 };
-MyElement.styles = css `
+Game.styles = css `
     :host {
       display: block;
       border: solid 1px gray;
@@ -61,12 +61,12 @@ MyElement.styles = css `
   `;
 __decorate([
     property()
-], MyElement.prototype, "name", void 0);
+], Game.prototype, "name", void 0);
 __decorate([
     property({ type: Number })
-], MyElement.prototype, "count", void 0);
-MyElement = __decorate([
-    customElement('my-element')
-], MyElement);
-export { MyElement };
-//# sourceMappingURL=my-element.js.map
+], Game.prototype, "count", void 0);
+Game = __decorate([
+    customElement('memory-game')
+], Game);
+export { Game };
+//# sourceMappingURL=game.js.map
